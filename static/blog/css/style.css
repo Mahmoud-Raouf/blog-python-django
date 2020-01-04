@@ -539,7 +539,7 @@ RESPONSIVE
      padding: 3px 10px;
      font-weight: 600;
      border-radius: 2px;
-     margin-right: 15px;
+     margin-right: 1px;
      color: #FFF;
      background-color: #212631;
      -webkit-transition: 0.2s opacity;
@@ -709,10 +709,10 @@ RESPONSIVE
 	author
 \*----------------------------*/
  .post-author .media .media-left {
-     padding-right: 40px;
+     margin-left: 20px;
 }
  .post-author .media .media-left .media-object {
-     width:120px;
+     width:80px;
      border-radius: 50%;
 }
  .post-author .author-social {
@@ -779,6 +779,7 @@ RESPONSIVE
 ===========================================================*/
  .aside-widget {
      margin-bottom: 40px;
+     width: 360px !important;
 }
 /*----------------------------*\
 	category

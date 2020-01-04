@@ -25,7 +25,7 @@
 									<a class="post-category cat-2" href="{% url 'blog:detail' post.slug %}">{{post.title}}</a>
 									<span class="post-date">تم النشر فى {{post.created_in|date:'d-m-Y'}}</span>
 								</div>
-								<h3 class="post-title"><a href="blog-post.html">{{post.text}}</a></h3>
+								<h3 class="post-title"><a  href="{% url 'blog:detail' post.slug %}">{{post.short_description}}</aclass="text-white bg-dark"></h3>
 							</div>
 						</div>
 					</div>

@@ -781,6 +781,13 @@ RESPONSIVE
      margin-bottom: 40px;
      width: 360px !important;
 }
+.all-post-blog .a-title{
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff ;
+    background-color: #0b0f28;
+    
+}
 /*----------------------------*\
 	category
 \*----------------------------*/

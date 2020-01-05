@@ -59,14 +59,19 @@
 						<!-- nav -->
 						<ul class="nav-menu nav navbar-nav">
 							<li><a href="/blog">الصفحه الرئيسيه</a></li>
+							{% if user.is_authenticated %}
 							<li><a href="category.html">من انا</a></li>
-							<li class="cat-1"><a href="category.html">اشهر المدونات</a></li>
+							{% endif %}
+
+							<li class="cat-2"><a href="category.html">اشهر المدونات</a></li>
 
 						</ul>
-						<!-- /nav -->
-						<ul class="nav-menu nav navbar-nav" style="margin-right: 37rem;">
-							<li><a href="/blog">تسجيل الدخول</a></li>
-							<li><a href="{% url 'user:signup' %}">تسجيل</a></li>
+						<!-- We use "is_authenticated" for check user is login or not -->
+						{% if user.is_authenticated %}
+						<!-- if use login status -->
+						<ul class="nav-menu nav navbar-nav" style="margin-right: 34rem;">
+							<li class="cat-1"><a href="{% url 'user:login'%}">إنشاء مقاله</a></li>
+							<li ><a href="{% url 'user:logout' %}">تسجيل الخروج</a></li>
 
 						</ul>
 						<div class="nav-btns">
@@ -76,6 +81,21 @@
 								<button class="search-close"><i class="fa fa-times"></i></button>
 							</div>
 						</div>
+						{% else %}
+						<!-- if use logout status -->
+						<!-- /nav -->
+						<ul class="nav-menu nav navbar-nav" style="margin-right: 45rem;">
+							<li><a href="{% url 'user:login'%}">تسجيل الدخول</a></li>
+							<li><a href="{% url 'user:signup' %}">تسجيل</a></li>
+						</ul>
+						<div class="nav-btns">
+							<button class="search-btn"><i class="fa fa-search"></i></button>
+							<div class="search-form">
+								<input class="search-input " type="text" name="search" placeholder="ابحث هنا ....">
+								<button class="search-close"><i class="fa fa-times"></i></button>
+							</div>
+						</div>
+						{% endif %}
 
 					</div>
 				</div>

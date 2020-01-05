@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+    {% block content %}
+        <div  style="margin-top: 100px; margin-right:40%; ">
+                {% csrf_token %}
+                <h3 style="color: brown;" >لقد تم تسجيل الخروج بنجاح</h3>
+                <a href="{% url 'user:login'%}" ><h5 style="color: rgb(2, 112, 255);">تسجيل الدخول مره اخرى</h5></a>
+                <div class="section-row">
+                    <h3></h3>
+                </div>
+        </div>
+
+    {% endblock content %}

@@ -3,7 +3,8 @@
 {% load static %}
 {% block content %}
 {% if messages %}
-	 {% for message in messages %}
+<!-- For appear message automatically when user created account in our blog -->
+	 {% for message in messages %} 
 	   <div class="alert alert-{{message.tags}}">
 			{{message}}
 	   </div>

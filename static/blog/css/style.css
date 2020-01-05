@@ -311,7 +311,7 @@ RESPONSIVE
      background-color: #0078ff;
 }
  .nav-menu li.cat-4 a:after {
-     background-color: #8d00ff;
+     background-color: #e70000;
 }
  .nav-menu li a:hover, .nav-menu li a:focus {
      background-color: transparent;
@@ -327,7 +327,7 @@ RESPONSIVE
      color: #0078ff;
 }
  .nav-menu li.cat-4 a:hover, .nav-menu li.cat-4 a:focus {
-     color: #8d00ff;
+     color: #e70000;
 }
 
 
@@ -451,8 +451,6 @@ RESPONSIVE
  .page-header {
      position: relative;
      margin: 0;
-	 padding-top: 60px;
-     padding-bottom: 60px;
      background-color: #fbfbfd;
      border-bottom: 2px solid #F4f4f9;
 }

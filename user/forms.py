@@ -25,3 +25,10 @@ class UserCreationForm(forms.ModelForm):
         if User.objects.filter(username = cd['username']).exists():
             raise forms.ValidationError('هذا الاسم موجد حاليا ادخل اسم اخر .')
         return cd['username']
+
+class LoginForm(forms.ModelForm):
+    username = forms.CharField(label='الاسم ')
+    password = forms.CharField(label='كلمه السر ', widget=forms.PasswordInput())
+    class Meta:
+        model = User
+        fields = ('username' , 'password')

@@ -51,6 +51,11 @@
 						</div>
 						<!-- /logo -->
 
+						<!-- search & aside toggle -->
+						<div class="nav-btns">
+							<button class="aside-btn"><i class="fa fa-bars"></i></button>
+						</div>
+						<!-- /search & aside toggle -->
 						<!-- nav -->
 						<ul class="nav-menu nav navbar-nav">
 							<li><a href="/blog">الصفحه الرئيسيه</a></li>
@@ -59,17 +64,19 @@
 
 						</ul>
 						<!-- /nav -->
+						<ul class="nav-menu nav navbar-nav" style="margin-right: 37rem;">
+							<li><a href="/blog">تسجيل الدخول</a></li>
+							<li><a href="{% url 'user:signup' %}">تسجيل</a></li>
 
-						<!-- search & aside toggle -->
+						</ul>
 						<div class="nav-btns">
-							<button class="aside-btn"><i class="fa fa-bars"></i></button>
 							<button class="search-btn"><i class="fa fa-search"></i></button>
 							<div class="search-form">
 								<input class="search-input " type="text" name="search" placeholder="ابحث هنا ....">
 								<button class="search-close"><i class="fa fa-times"></i></button>
 							</div>
 						</div>
-						<!-- /search & aside toggle -->
+
 					</div>
 				</div>
 				<!-- /Main Nav -->

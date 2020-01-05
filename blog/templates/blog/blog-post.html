@@ -1,6 +1,9 @@
 
 {% extends "base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
+
+
 
 		{% block content %}
 		<!-- section -->
@@ -76,7 +79,6 @@
 							</div>
 
 							<div class="post-comments" >
-								
 								{% for comment in comments %}
 								<!-- comment -->
 								<div class="media">
@@ -86,9 +88,9 @@
 									<div class="media-body " >
 										<div class="media-heading">
 											<h4>{{comment.name}}</h4>
-											<span class="time">تم التعليق في {{comment.coment_date|date:'d-m-Y'}}</span>
+											<span class="time">تم التعليق في {{comment.comment_date|date:'d-m-Y'}}</span>
 										</div>
-										<p>{{comment.coment}}</p>
+										<p>{{comment.comment}}</p>
 										<a href="#" class="reply">الردود ..</a>
 
 										<!-- comment -->
@@ -114,50 +116,54 @@
 									<h4>لا يوجد تعليقات حتى الأن ..</h4>
 								</div>
 								{% endfor %}
-
-
 							</div>
 						</div>
 						<!-- /comments -->
 
-						<!-- reply -->
-						<div class="section-row">
-							<div class="section-title">
-								<h2 style="color: brown;">أترك تعليق هنا  ^_^ </h2>
-								<p>الايميل الخاص بك لن يتم اظهاره!</p>
-							</div>
-							<form class="post-reply">
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<span>الاسم *</span>
-											<input class="input" type="text" name="name">
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<span>الايميل *</span>
-											<input class="input" type="email" name="email">
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="form-group">
-											<span>الموقع</span>
-											<input class="input" type="text" name="website">
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="form-group">
-											<textarea class="input" name="message" placeholder="محتوى الرساله ....."></textarea>
-										</div>
-										<button class="primary-button">تعليق</button>
-									</div>
+						<form method="POST">
+							{% csrf_token %}
+							<!-- reply -->
+							<div class="section-row">
+								<div class="section-title">
+									<h2 style="color: brown;">أترك تعليق هنا  ^_^ </h2>
+									<p>الايميل الخاص بك لن يتم اظهاره!</p>
 								</div>
-							</form>
-						</div>
-						<!-- /reply -->
+								<form class="post-reply">
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group"> 
+												<!-- Custom Fields to comment with Crispy Forms -->
+												{{ forms_comment.name|as_crispy_field }} 
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<!-- Custom Fields to comment with Crispy Forms -->
+												{{ forms_comment.email|as_crispy_field }}
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<!-- Custom Fields to comment with Crispy Forms -->
+												{{ forms_comment.site|as_crispy_field }}
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<!-- Custom Fields to comment with Crispy Forms -->
+												{{ forms_comment.comment|as_crispy_field }}
+											</div>
+											<input type="submit" class="primary-button" value="نشر التعليق">
+										</div>
+									</div>
+								</form>
+							</div>
+							<!-- /reply -->
+						</form>
+
 					</div>
 					<!-- /Post content -->
+
 						<!-- post widget -->
 					<div class="row">
 						<div class="section-title">

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+    {% block content %}
+        <div class="container" >
+			<div class="row " style="padding-right: 30%; margin-top: 44px; ">
+                <div class="col-md-8 ">
+				<form method="POST" >
+                    {% csrf_token %}
+					<h3>التسجيل</h3>
+                    <div class="section-row">
+                        <form class="post-reply">
+                            <div class="row " >
+                                <div class="col-md-6 " style="height: 25px;">
+                                        <!-- Custom Fields to comment with Crispy Forms -->
+                                        {{ form.username|as_crispy_field }} 
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div >
+                                        <!-- Custom Fields to comment with Crispy Forms -->
+                                        {{ form.email|as_crispy_field }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                        <!-- Custom Fields to comment with Crispy Forms -->
+                                        {{ form.first_name|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                        <!-- Custom Fields to comment with Crispy Forms -->
+                                        {{ form.last_name|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                        <!-- Custom Fields to comment with Crispy Forms -->
+                                        {{ form.password1|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                        <!-- Custom Fields to comment with Crispy Forms -->
+                                        {{ form.password2|as_crispy_field }}
+                                </div>
+                            </div>
+                        </form>
+                    
+						<label>
+							<input class="mb-4" type="checkbox"> I caccept the Terms of Use & Privacy Policy.
+							<span class="checkmark"></span>
+                        </label>
+                        <br>
+                        <br>
+                        <input type="submit" class="primary-button" value="تسجيل">
+                    </div>
+					</div>
+                </form>
+            </div>
+            </div>
+		</div>
+    {% endblock content %}

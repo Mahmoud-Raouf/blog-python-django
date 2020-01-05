@@ -31,16 +31,21 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    name = models.CharField(_("الاسم:"), max_length=50)
-    email = models.EmailField(_("الايميل :"), max_length=50)
-    coment = models.TextField(_("التعليق :"), max_length=500)
-    coment_date = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(_("الحاله :"), default=False)
-    post = models.ForeignKey(Post , related_name='comments', on_delete=models.CASCADE)
+    name = models.CharField(_("الاسم : "), max_length=50)
+    email = models.EmailField(_("الايميل : "), max_length=50)
+    comment = models.TextField(_("التعليق : "), max_length=500)
+    comment_date = models.DateTimeField(auto_now_add=True)
+    site = models.CharField(_("الموقع : "), max_length=50)
+    active = models.BooleanField(_("الحاله : "), default=False, blank=True, null=True)
+    post = models.ForeignKey('Post' , related_name='comments', on_delete=models.CASCADE)
 
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
 
     def __str__(self):
-        return '{} علق على {}'.format(self.name , self.post)
+        return '{} علق على {}'.format(self.name, self.post )
 
     class Meta:
-        ordering = ('-coment_date',)
+        ordering = ('-comment_date',)

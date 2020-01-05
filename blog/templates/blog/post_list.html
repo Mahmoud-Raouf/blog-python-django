@@ -1,11 +1,14 @@
 
 {% extends "base.html" %}
 {% load static %}
-
-		{% block content %}
-		  
-        <div dir="rtl">
-
+{% block content %}
+{% if messages %}
+	 {% for message in messages %}
+	   <div class="alert alert-{{message.tags}}">
+			{{message}}
+	   </div>
+	 {% endfor %}
+{% endif %}
 		<!-- section -->
 		<div class="section">
 			<!-- container -->
@@ -16,7 +19,6 @@
 					<!-- post -->
 					<div class="col-md-6">
 						<div class="post post-thumb">
-							
 							{% if post.image %}								
 								<a class="post-img" href="blog-post.html"><img src="{{post.image.url}}" alt="" style="width: 555px; height: 333px;"></a>
 							{% endif %}

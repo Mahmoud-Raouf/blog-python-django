@@ -63,6 +63,7 @@ RESPONSIVE
  h4 {
      font-size: 16px;
 }
+
  a {
      font-weight: 600;
      color: #212631;
@@ -271,6 +272,8 @@ RESPONSIVE
 /*----------------------------*\
 	menu
 \*----------------------------*/
+
+
  .nav-menu {
      margin-left: 20px;
 }
@@ -297,6 +300,7 @@ RESPONSIVE
      -webkit-transition: 0.2s width;
      transition: 0.2s width;
 }
+
  .nav-menu li.cat-1 a:after {
      background-color: #4BB92F;
 }
@@ -325,6 +329,8 @@ RESPONSIVE
  .nav-menu li.cat-4 a:hover, .nav-menu li.cat-4 a:focus {
      color: #8d00ff;
 }
+
+
 /*----------------------------*\
 	search
 \*----------------------------*/

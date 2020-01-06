@@ -7,11 +7,12 @@ class UserCreationForm(forms.ModelForm):
     email = forms.EmailField(label= 'البريد الاليكترونى ')
     first_name = forms.CharField(label='الاسم الاول ')
     last_name = forms.CharField(label='الاسم الاخير ')
+    who_i = forms.CharField(label='السيره الذاتيه ', max_length=150)
     password1 = forms.CharField(label='كلمه السر ', widget= forms.PasswordInput(), min_length=8) #we using widget for hidden password
     password2 = forms.CharField(label='تأكيد كلمه السر ', widget= forms.PasswordInput(), min_length=8)
     class Meta:
         model = User
-        fields = ('username' , 'email' , 'first_name' , 'last_name' , 'password1', 'password2')
+        fields = ('username' , 'email' , 'first_name' , 'last_name' , 'password1', 'password2' , 'who_i')
 
 
     def clean_password2(self):

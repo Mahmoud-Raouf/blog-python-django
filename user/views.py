@@ -2,6 +2,8 @@ from django.shortcuts import render , redirect
 from . forms import UserCreationForm , LoginForm
 from django.contrib import messages
 from django.contrib.auth import authenticate , login , logout
+from blog.models import Post
+from .models import Profile
 
 
 def signup(request):
@@ -42,12 +44,22 @@ def login_user(request):
 
 def logout_user(request):
     logout(request) #To logout user
+    posts = Post.objects.all() #To import all posts from blog app to appear inside my app user
+
     return render(request , 'user/logout.html',{
         'title' : 'تسجيل الخروج',
+        'posts' : posts,
+
     })
 
 
 def profile(request):
+    posts = Post.objects.all() #To import all posts from blog app to appear inside my app user
+    user_count_posts = Post.objects.filter(auther =request.user)
+    user_profile = Profile.objects.all()
     return render(request , 'user/profile.html', {
         'title' : 'الصفحه الشخصيه' ,
+        'posts' : posts,
+        'user_count_posts' : user_count_posts,
+        'user_profile' : user_profile
     })

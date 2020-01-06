@@ -173,7 +173,9 @@ RESPONSIVE
 ===========================================================*/
  #nav {
      height: 70px;
+    
 }
+
  #nav:after {
      content: "";
      position: fixed;
@@ -407,7 +409,7 @@ RESPONSIVE
      transform: translateX(0%);
 }
  .nav-aside-menu li a {
-     font-family: 'Nunito Sans', sans-serif;
+     font-family: 'Tajawal', sans-serif;
      font-weight:700;
      font-size:23px;
 }
@@ -519,6 +521,7 @@ RESPONSIVE
 /*----------------------------*\
 	post
 \*----------------------------*/
+
  .post {
      margin-bottom: 40px;
 }

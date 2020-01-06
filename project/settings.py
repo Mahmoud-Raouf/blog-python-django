@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'blog',
     'user',
     'crispy_forms',
+    'django_countries',
 ]
 
 MIDDLEWARE = [

@@ -3,7 +3,9 @@
 {% load crispy_forms_tags %}
 
     {% block content %}
-        <div  style="margin-top: 100px; margin-right:40%; ">
+    <div class="col-md-12">
+    <div class="col-md-8">
+        <div  style="margin-top: 20%; margin-right:30%; ">
                 {% csrf_token %}
                 <h3 style="color: brown;" >لقد تم تسجيل الخروج بنجاح</h3>
                 <a href="{% url 'user:login'%}" ><h5 style="color: rgb(2, 112, 255);">تسجيل الدخول مره اخرى</h5></a>
@@ -11,5 +13,27 @@
                     <h3></h3>
                 </div>
         </div>
+    </div>
+        <!--aside post widget -->
+    <div class="col-md-4 " style="margin-top: 7rem;">
+        <div class="aside-widget">
+            <div class="section-title  mt-6">
+                <h2>يجب ان تقرأ هذا ^_^</h2>
+            </div>
+            {% for post in posts %}
+            <div class="post post-widget">
+                {% if post.image %}
+                <a class="post-img" href="blog-post.html"><img src="{{post.image.url}}" alt=""></a>
+                {% endif %}
+                <div class="post-body">
+                    <h3 class="post-title"><a href="blog-post.html">{{post.title}}</a></h3>
+                    <h3 class="post-title"><a href="blog-post.html">{{post.short_description}}</a></h3>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- /post widget -->
+    </div>
+    </div>
 
     {% endblock content %}

@@ -31,17 +31,21 @@
 				<!-- row -->
 				<div class="row">
 					<div class="col-md-8">
-						<div class="section-row">
-							<p>هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي" فتجعلها تبدو (أي الأحرف) وكأنها نص مقروء. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم إيبسوم بشكل إفتراضي كنموذج عن النص، وإذا قمت بإدخال "lorem ipsum" في أي محرك بحث ستظهر العديد من المواقع الحديثة العهد في نتائج البحث. على مدى السنين ظهرت نسخ جديدة ومختلفة من نص لوريم إيبسوم، أحياناً عن طريق الصدفة، وأحياناً عن عمد كإدخال بعض العبارات الفكاهية إليها.</p>
-							<figure class="figure-img">
-								<img class="img-responsive" src="{% static 'blog/img/about-1.jpg' %}" alt="">
-							</figure>
-							<p>هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة ما سيلهي القارئ عن التركيز على الشكل الخارجي للنص أو شكل توضع الفقرات في الصفحة التي يقرأها. ولذلك يتم استخدام طريقة لوريم إيبسوم لأنها تعطي توزيعاَ طبيعياَ -إلى حد ما- للأحرف عوضاً عن استخدام "هنا يوجد محتوى نصي، هنا يوجد محتوى نصي" فتجعلها تبدو (أي الأحرف) وكأنها نص مقروء. العديد من برامح النشر المكتبي وبرامح تحرير صفحات الويب تستخدم لوريم إيبسوم بشكل إفتراضي كنموذج عن النص، وإذا قمت بإدخاهنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم ما، عليك أن تتحقق أولاً أن ليس هناك أي كلمات أو عبارات محرجة أو غير لائقة مخبأة في هذا النص. بينما تعمل جميع مولّدات نصوص لوريم إيبسوم على الإنترنت على إعادة تكرار مقاطع من نص لوريم إيبسوم نفسه عدة مرات بما تتطلبه الحاجة، يقوم مولّدنا هذا باستخدام كلمات من قاموس يحوي على أكثر من 200 كلمة لا تينية، مضاف إليها مجموعة من الجمل النموذجية، لتكوين نص لوريم إيبسوم ذو شكل منطقي قريب إلى النص الحقيقي. وبالتالي يكون النص الناتح خالي من التكرار، أو أي كلمات أو عبارات غير لائقة أو ما شابه. وهذا ما يجعله أول مولّد نص لوريم إيبسوم حقيقي على الإنترنت.</p>
+						<div class="section-row text-center">
+							{% if user_profile.image %}
+							<img class="img-circle border mb-3" width="304" height="236" 
+							src="{{user_profile.image.url}}" style="margin-bottom: 16px;">
+							{% endif %}
+							<h3 class="">اسم الكاتب : <span>{{user.first_name}} {{user.last_name}}</span></h3>
+							<h4>الايميل الخاص بالكاتب : {{user.email}}</h4>
+							<h4><p>{{user.who_i}}</p></h4>
+							<h3 >عدد المقالات : <span class="text-danger">( {{user_count_posts.count}} )</span></h3>
+
 						</div>
 						<div class="row section-row">
 							<div class="col-md-6">
 								<figure class="figure-img">
-									<img class="img-responsive" src="{% static 'blog/img/about-2.jpg'%}" alt="">
+									<img class="img-responsive" src="{% static 'blog/img/about-2.jpg'%}" >
 								</figure>
 							</div>
 							<div class="col-md-6">
@@ -67,38 +71,42 @@
 						<!-- /ad -->
 
 						<!-- post widget -->
+						
 						<div class="aside-widget">
 							<div class="section-title">
-								<h2>Most Read</h2>
+								<h2 class="text-danger">مقالاتى ^_^</h2>
 							</div>
-
+							<!-- to appear every post created by user -->
+							{% for post in user_count_posts %}
 							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-1.jpg'%}" alt=""></a>
+								{% if post.image %}
+								<a class="post-img" href="blog-post.html"><img src="{{post.image.url}}" alt=""></a>
+								{% endif %}
 								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+									<h3 class="post-title"><a href="blog-post.html">{{post.title}}</a></h3>
+									<h3 class="post-title"><a href="blog-post.html">{{post.short_description}}</a></h3>
 								</div>
 							</div>
+							{% endfor %}
 
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-2.jpg'%}" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-								</div>
-							</div>
-
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-3.jpg'%}" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-								</div>
-							</div>
-
-							<div class="post post-widget">
-								<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-4.jpg'%}" alt=""></a>
-								<div class="post-body">
-									<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-								</div>
-							</div>
+							<!-- Pagination -->
+								  <nav style="margin-right: 10rem; margin-top: -3rem;">
+									<ul class="pagination" >
+									  <li class="disabled" >
+										<a href="#" aria-label="Previous" > 
+										  <span aria-hidden="true">«</span>
+										</a>
+									  </li>
+									  <li class="active"><a href="#" style="background-color: rgb(134, 90, 255);">1</a>
+									  </li>
+									  <li>
+										<a href="#" aria-label="Next">
+										  <span aria-hidden="true">»</span>
+										</a>
+									  </li>
+									</ul>
+								  </nav>
+							<!-- /Pagination -->
 						</div>
 						<!-- /post widget -->
 					</div>

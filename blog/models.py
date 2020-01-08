@@ -11,7 +11,7 @@ class Post(models.Model):
     image = models.ImageField(_("الصوره :"), upload_to='image', blank=True, null=True  )
     created_in = models.DateTimeField(_("انشاء فى :"),auto_now_add=True, blank=True, null=True)
     update_by = models.DateTimeField(_("تم التحديث :"),auto_now_add=True, blank=True, null=True)
-    auther = models.ForeignKey(User , related_name='auther', on_delete=models.CASCADE)
+    author = models.ForeignKey(User , related_name='author', on_delete=models.CASCADE)
     slug = models.SlugField(_("Slug :"), blank=True, null=True)
 
     def save(self, *args, **kwargs):

@@ -23,7 +23,6 @@
 			<!-- /Page Header -->
 		</header>
 		<!-- /Header -->
-		
 		<!-- section -->
 		<div class="section">
 			<!-- container -->
@@ -32,13 +31,19 @@
 				<div class="row">
 					<div class="col-md-8">
 						<div class="section-row text-center">
-							{% if user_profile.image %}
+							{% if user.profile.image %}
 							<img class="img-circle border mb-3" width="304" height="236" 
-							src="{{user_profile.image.url}}" style="margin-bottom: 16px;">
+							src="{{user.profile.image.url}}" style="margin-bottom: 16px;">
+							{% else %}
+							<img class="img-circle border mb-3" width="304" height="236" 
+							src="{% static 'blog/img/author.png'%}" style="margin-bottom: 16px;">
 							{% endif %}
+
 							<h3 class="">اسم الكاتب : <span>{{user.first_name}} {{user.last_name}}</span></h3>
 							<h4>الايميل الخاص بالكاتب : {{user.email}}</h4>
-							<h4><p>{{user.who_i}}</p></h4>
+							<h4>العنوان الخاص به : {{user.profile.country}} {{user.profile.address}}</h4>
+							<h4>السيره الذاتيه :</h4>
+							<h4  style="width :53rem; margin-right: 10rem;"><p>{{user.profile.who_i}}</p></h4>
 							<h3 >عدد المقالات : <span class="text-danger">( {{user_count_posts.count}} )</span></h3>
 
 						</div>
@@ -89,24 +94,8 @@
 							</div>
 							{% endfor %}
 
-							<!-- Pagination -->
-								  <nav style="margin-right: 10rem; margin-top: -3rem;">
-									<ul class="pagination" >
-									  <li class="disabled" >
-										<a href="#" aria-label="Previous" > 
-										  <span aria-hidden="true">«</span>
-										</a>
-									  </li>
-									  <li class="active"><a href="#" style="background-color: rgb(134, 90, 255);">1</a>
-									  </li>
-									  <li>
-										<a href="#" aria-label="Next">
-										  <span aria-hidden="true">»</span>
-										</a>
-									  </li>
-									</ul>
-								  </nav>
-							<!-- /Pagination -->
+
+
 						</div>
 						<!-- /post widget -->
 					</div>

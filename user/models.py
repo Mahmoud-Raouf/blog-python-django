@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 from django_countries.fields import CountryField
 from django.utils.text import slugify
+from django.db.models.signals import post_save
+from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User , verbose_name=_("user_profile"), on_delete=models.CASCADE)
@@ -20,6 +22,20 @@ class Profile(models.Model):
             self.slug = slugify(self.user.username)
         super(Profile, self).save(*args, **kwargs)
 
+
+        img = Image.open(self.image.path) #If the image > "300w ,300h" this variable will minimize it using pillow library 
+        if img.width > 300 or img.height > 300:
+            output_size = (300,300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+
+
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
+
+def create_profile(sender , **kwrag):
+    if kwrag['created']:
+        Profile.objects.create(user=kwrag['instance'])
+
+post_save.connect(create_profile , sender=User)

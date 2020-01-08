@@ -18,12 +18,14 @@
 				<div class="row">	
 					{% for post in posts %}
 					<!-- post -->
-					<div class="col-md-6">
+					<div class="col-md-6 ">
 						<div class="post post-thumb">
 							{% if post.image %}								
 								<a class="post-img" href="blog-post.html"><img src="{{post.image.url}}" alt="" style="width: 555px; height: 333px;"></a>
 							{% endif %}
 							<div class="post-body">
+								<img class="img-circle border mb-3" width="70" height="70"
+								src="{{post.author.profile.image.url}}" style="margin-bottom: -11rem; margin-right: 45rem;">
 								<div class="post-meta">
 									<a class="post-category cat-2" href="{% url 'blog:detail' post.slug %}">{{post.title}}</a>
 									<span class="post-date">تم النشر فى {{post.created_in|date:'d-m-Y'}}</span>
@@ -34,18 +36,44 @@
 					</div>
 					{% endfor %}
 
+					{% if posts.has_other_pages %}
+					<!-- Pagination -->
+					<div class="contain-pagination">
+						<ul class="pagination" style="margin-right: 48rem; ">
+							
+							{% if posts.has_previous %}
+							<li><a href="?page={{posts.previous_page_number}}">السابق</a></li>
+							{% else %}
+							<li class="disabled"><a href="#">السابق</a></li>
+							{% endif %}
+
+							{% for pages in posts.paginator.page_range %}
+								{% if posts.number == pages %}
+									<li class="active"><a >{{pages}}</a>
+										{% else %}
+										<li ><a href="?page={{pages}}">{{pages}}</a></li>
+								{% endif %}
+							{% endfor %}
+
+							{% if posts.has_next %}
+								<li>
+								<a href="?page={{posts.next_page_number}}" >التالى</a>
+								{% else %}
+								<li class="disabled"><a href="#">التالى</a></li>
+								</li>
+							{% endif %}
+						</ul>
+					</div>
+					<!-- /Pagination -->
+					{% endif %}
 					<!-- /post -->
-
-
 				</div>
 				<!-- /row -->
-
 				<!-- row -->
 				<div class="row">
 
 				</div>
 		<!-- /section -->
-		
 		<!-- section -->
 		<div class="section">
 			<!-- container -->

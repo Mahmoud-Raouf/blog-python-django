@@ -1,7 +1,11 @@
 from django.shortcuts import render , redirect
-from . forms import UserCreationForm , LoginForm
+from . forms import UserCreationForm , LoginForm ,EditForm
 from django.contrib import messages
 from django.contrib.auth import authenticate , login , logout
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
+
 from blog.models import Post
 from .models import Profile
 
@@ -10,12 +14,22 @@ def signup(request):
     if request.method == "POST":
         form = UserCreationForm(request.POST) #Using data from request to create a new account for user
         if form.is_valid(): #To check data is valid and it is completed or not
-            form.save()
-            username = form.cleaned_data['username'] # To get username for message
-            messages.success(
-                request, 'تهانينا {} لقد تمت عمليه التسجيل بنجاح .'.format(username)
-            )
-            return redirect('/blog/')
+            new_user = form.save(commit=False)
+            new_user.set_password(form.cleaned_data['password1']) #To clean password for anew user and save it 
+            new_user.save()
+            
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=password)
+            if user is not None: #If user have data from authenticate
+                login(request, user)
+
+                # To get username for message
+                username = form.cleaned_data['username'] 
+                messages.success(
+                    request, 'تهانينا {} لقد تمت عمليه التسجيل بنجاح .'.format(username)
+                )
+                return redirect('user:profile')
     else:
         form = UserCreationForm()
     return render(request , 'user/signup.html' , {
@@ -32,7 +46,7 @@ def login_user(request):
         user = authenticate(request ,username=username , password=password) #To login using username and password
         if user is not None: #If user have data from authenticate
             login(request, user)
-            return redirect('/blog')
+            return redirect('user:profile')
         else:
             messages.warning(request, 'هناك خطأ فى اسم المستخدم او كلمه المرور .')
     else:
@@ -40,6 +54,7 @@ def login_user(request):
     return render(request , 'user/login.html', {
         'title' : 'تسجيل الدخول',
         'form' : form,
+        
     })
 
 def logout_user(request):
@@ -52,14 +67,34 @@ def logout_user(request):
 
     })
 
-
+@login_required(login_url='user:login') #For redirect user to login page if he want go to profile but he didn't login
 def profile(request):
-    posts = Post.objects.all() #To import all posts from blog app to appear inside my app user
-    user_count_posts = Post.objects.filter(auther =request.user)
-    user_profile = Profile.objects.all()
+    user_count_posts = Post.objects.filter(author =request.user)
+
+    paginator = Paginator(user_count_posts , 1)
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
+
     return render(request , 'user/profile.html', {
         'title' : 'الصفحه الشخصيه' ,
         'posts' : posts,
         'user_count_posts' : user_count_posts,
-        'user_profile' : user_profile
+    })
+
+
+def edit_profile(request):
+
+    form = EditForm()
+    if request.method == "POST":
+        form = EditForm(request.POST)
+        if form.is_valid():
+            form.save()
+            print(form)
+        else:
+            form = EditForm()
+    else:
+        form = EditForm()
+    return render(request , 'user/edit_profile.html',{
+        'title' : 'تعديل البروفيل',
+        'form' : form,
     })

@@ -2,13 +2,19 @@ from django.shortcuts import render , get_object_or_404 , redirect
 from django.http import HttpResponse
 from .models import Post ,Comment
 from .forms import CommentForm
+from django.contrib.auth.models import User
+from django.core.paginator import Paginator
 
 def post_list(request):
     posts = Post.objects.all()
 
+    paginator = Paginator(posts , 2)
+    page_number = request.GET.get('page')
+    posts = paginator.get_page(page_number)
+
     context ={
         'title' : 'الصفحه الرئيسيه',
-        'posts' : posts
+        'posts' : posts,
     }
     return render(request ,'blog/post_list.html',context)
 

@@ -6,37 +6,53 @@
 	<div class="container" >
 		<div class="row " style="padding-right: 30%; margin-top: 44px; ">
 			<div class="col-md-8 ">
-			<form method="POST" >
+			<form method="POST" enctype="multipart/form-data">
 				{% csrf_token %}
-				<h3>التسجيل</h3>
+				<h3>تعديل الملف الشخصي</h3>
 				<div class="section-row">
 					<form class="post-reply">
 						<div class="row " >
-							<div class="col-md-6 ">
-								<div >
+							<div class="col-md-6">
 									<!-- Custom Fields to comment with Crispy Forms -->
-									{{ form.image|as_crispy_field }}
-								</div>
+									{{ user_form.first_name|as_crispy_field }}
 							</div>
 							<div class="col-md-6">
 									<!-- Custom Fields to comment with Crispy Forms -->
-									{{ form.country|as_crispy_field }}
+									{{ user_form.last_name|as_crispy_field }}
+							</div>	
+							<div class="col-md-6">
+									<!-- Custom Fields to comment with Crispy Forms -->
+									{{ user_form.email|as_crispy_field }}
+							</div>							
+
+							<div class="col-md-6">
+									<!-- Custom Fields to comment with Crispy Forms -->
+									{{ profile_form.country|as_crispy_field }}
 							</div>
 							<div class="col-md-6">
 									<!-- Custom Fields to comment with Crispy Forms -->
-									{{ form.address|as_crispy_field }}
+									{{ profile_form.address|as_crispy_field }}
 							</div>
-							
 							<div class="col-md-12">
 								<div class="form-group">
 								<!-- Custom Fields to comment with Crispy Forms -->
-								{{ form.who_i|as_crispy_field }}
+								{{ profile_form.who_i|as_crispy_field }}
+							</div>
+							<div class="col-md-6 ">
+								<div >
+									<!-- Custom Fields to comment with my Forms -->
+									<span >صوره الملف الشخصي *</span>
+									<br>
+									<br>
+									<label for="image" class="btn btn-success">اختيار الصوره</label>
+									<input type="file" name="image" id="image" accept="image/*" style="display: none;">
+								</div>
 							</div>
 							</div>
 						</div>
 					</form>
 					<br>
-					<input type="submit" class="primary-button" value="تسجيل">
+					<input type="submit" class="primary-button" value="تعديل">
 				</div>
 				</div>
 			</form>

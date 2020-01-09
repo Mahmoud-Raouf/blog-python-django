@@ -35,7 +35,16 @@ class LoginForm(forms.ModelForm):
         model = User
         fields = ('username' , 'password')
 
-class EditForm(forms.ModelForm):
+
+class UpdateUserForm(forms.ModelForm):
+    first_name = forms.CharField(label='الاسم الاول ')
+    last_name = forms.CharField(label='الاسم الاخير ')
+    email = forms.EmailField(label= 'البريد الاليكترونى ')
+    class Meta:
+        model = User
+        fields = ('first_name' , 'last_name' , 'email')
+
+class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('image' , 'country' , 'address','who_i')
+        fields = ('image' , 'country' , 'address' , 'who_i')

@@ -6,6 +6,14 @@
 {% endif %}
     
 {% block content %}
+{% if messages %}
+<!-- For appear message automatically when user created account in our blog -->
+	 {% for message in messages %} 
+	   <div class="alert alert-{{message.tags}}">
+			{{message}}
+	   </div>
+	 {% endfor %}
+{% endif %}
 			<!-- Page Header -->
 			<div class="page-header" style="padding-top: 10px; padding-bottom: 10px;">
 				<div class="container">
@@ -38,6 +46,12 @@
 							<img class="img-circle border mb-3" width="304" height="236" 
 							src="{% static 'blog/img/author.png'%}" style="margin-bottom: 16px;">
 							{% endif %}
+							<br>
+							<a href="{% url 'user:update_profile' %}">
+								<input type="submit" class="primary-button" value="تعديل">
+							</a>
+							<br>
+							<br>
 
 							<h3 class="">اسم الكاتب : <span>{{user.first_name}} {{user.last_name}}</span></h3>
 							<h4>الايميل الخاص بالكاتب : {{user.email}}</h4>

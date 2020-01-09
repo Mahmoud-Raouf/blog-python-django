@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from . forms import UserCreationForm , LoginForm ,EditForm
+from . forms import UserCreationForm , LoginForm ,UpdateUserForm , UpdateProfileForm
 from django.contrib import messages
 from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.models import User
@@ -77,24 +77,30 @@ def profile(request):
 
     return render(request , 'user/profile.html', {
         'title' : 'الصفحه الشخصيه' ,
-        'posts' : posts,
+        'posts' : posts, 
         'user_count_posts' : user_count_posts,
     })
 
 
-def edit_profile(request):
+@login_required(login_url='user:login')
+def update_profile(request):
+    user_form = UpdateUserForm(instance=request.user)
+    profile_form = UpdateProfileForm(instance=request.user.profile)
 
-    form = EditForm()
     if request.method == "POST":
-        form = EditForm(request.POST)
-        if form.is_valid():
-            form.save()
-            print(form)
-        else:
-            form = EditForm()
-    else:
-        form = EditForm()
+        user_form = UpdateUserForm( request.POST , instance=request.user)
+        profile_form = UpdateProfileForm(request.POST , request.FILES ,instance=request.user.profile)
+        if user_form.is_valid and profile_form.is_valid:
+            user_form.save()
+            profile_form.save()
+            messages.success(
+                request, 'لقد تم تعديل الملف الشخصي بنجاح .'
+            )
+            return redirect('user:profile')
+
     return render(request , 'user/edit_profile.html',{
         'title' : 'تعديل البروفيل',
-        'form' : form,
+        'user_form' : user_form ,
+        'profile_form' : profile_form
+
     })

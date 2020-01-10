@@ -4,7 +4,7 @@ from .models import Post ,Comment
 from .forms import CommentForm , CreatePostForm
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from django.views.generic import CreateView
+from django.views.generic import CreateView ,UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -61,3 +61,11 @@ class PostCreateView(LoginRequiredMixin ,CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
+class PostUpdateView(LoginRequiredMixin ,UpdateView):
+    model = Post
+    form_class = CreatePostForm
+    template_name = 'blog/add_new_post.html'
+
+    def form_valid(self , form ):
+        form.instance.author = self.request.user
+        return super().form_valid(form)

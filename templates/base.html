@@ -59,10 +59,10 @@
 						<!-- nav -->
 						<ul class="nav-menu nav navbar-nav">
 							<li><a href="/blog">الصفحه الرئيسيه</a></li>
+
 							{% if user.is_authenticated %}
 							<li><a href="{% url 'user:profile' %}">من انا</a></li>
 							{% endif %}
-
 							<li class="cat-2"><a href="category.html">اشهر المدونات</a></li>
 
 						</ul>
@@ -72,7 +72,6 @@
 						<ul class="nav-menu nav navbar-nav" style="margin-right: 34rem;">
 							<li class="cat-1"><a href="{% url 'blog:add_post'%}">إنشاء مقاله</a></li>
 							<li ><a href="{% url 'user:logout' %}">تسجيل الخروج</a></li>
-
 						</ul>
 						<div class="nav-btns">
 							<button class="search-btn"><i class="fa fa-search"></i></button>
@@ -107,13 +106,11 @@
 					<div class="section-row">
 						<ul class="nav-aside-menu">
 							<li><a href="#">من نحن</a></li>
-							
 							{% if user.is_authenticated %}
-								<li><a href="{% url 'user:profile'%}">الصفحه الشخصيه</a></li>
+								<li><a href="{% url 'user:profile' %}">الصفحه الشخصيه</a></li>
 							{% else %}
-								<li><a href="{%url 'user:signup'%}">انضم لنا</a></li>
+								<li><a href="{% url 'user:signup' %}">انضم لنا</a></li>
 							{% endif %}
-								
 						</ul>
 					</div>
 					<!-- /nav -->

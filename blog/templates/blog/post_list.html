@@ -19,11 +19,24 @@
 					{% for post in posts %}
 					<!-- post -->
 					<div class="col-md-6 ">
+						<!-- Button of editing -->
+
+
 						<div class="post post-thumb">
+							<!-- Button of editing -->
 							{% if post.image %}								
 								<a class="post-img" href="blog-post.html"><img src="{{post.image.url}}" alt="" style="width: 555px; height: 333px;"></a>
 							{% endif %}
+
 							<div class="post-body">
+								<!-- This option for user to update blogs he created not another blogs -->
+								{% if post.author == user %}
+								<div class="form-group btn-editing" style="float: left ;margin-bottom: 17rem;">
+									<a class="btn btn-success" href="{% url 'blog:update_post' post.slug %}">تعديل</a>
+									<button class="btn btn-danger" type="submit">حذف</button>
+								</div>
+								{% endif %}
+
 								<img class="img-circle border mb-3" width="70" height="70"
 								src="{{post.author.profile.image.url}}" style="margin-bottom: -11rem; margin-right: 45rem;">
 								<div class="post-meta">

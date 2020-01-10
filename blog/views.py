@@ -1,14 +1,17 @@
 from django.shortcuts import render , get_object_or_404 , redirect
 from django.http import HttpResponse
 from .models import Post ,Comment
-from .forms import CommentForm
+from .forms import CommentForm , CreatePostForm
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.views.generic import CreateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 def post_list(request):
     posts = Post.objects.all()
 
-    paginator = Paginator(posts , 2)
+    paginator = Paginator(posts , 4)
     page_number = request.GET.get('page')
     posts = paginator.get_page(page_number)
 
@@ -46,3 +49,15 @@ def blog_post(request , slug):
 
 
     return render(request ,'blog/blog-post.html',context )
+
+#We use LoginRequiredMixin for no one can create blog if not login
+class PostCreateView(LoginRequiredMixin ,CreateView):
+    model = Post
+    # fields = ['title' , 'short_description' , 'description' , 'image']
+    form_class = CreatePostForm
+    template_name = 'blog/add_new_post.html'
+
+    def form_valid(self , form ):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+

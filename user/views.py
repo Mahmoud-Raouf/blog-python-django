@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-
 from blog.models import Post
 from .models import Profile
 
@@ -104,3 +103,4 @@ def update_profile(request):
         'profile_form' : profile_form
 
     })
+

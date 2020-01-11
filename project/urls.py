@@ -27,7 +27,10 @@ urlpatterns = [
 
     #api
     path('api/blog/', blog.serializers.PostList.as_view()),
+    path('api/blog/new_post/', blog.serializers.PostCreate.as_view()),
+    path('api/blog/<int:id>/', blog.serializers.PostUpdateDestroyAPIView.as_view()),
     
+
 
 ]
 

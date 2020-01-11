@@ -11,7 +11,7 @@
 	 {% endfor %}
 {% endif %}
 		<!-- section -->
-		<div class="section">
+		<div class="section " >
 			<!-- container -->
 			<div class="container">
 				<!-- row -->
@@ -20,23 +20,21 @@
 					<!-- post -->
 					<div class="col-md-6 ">
 						<!-- Button of editing -->
-
-
-						<div class="post post-thumb">
-							<!-- Button of editing -->
+						<div class="post post-thumb" >
 							{% if post.image %}								
-								<a class="post-img" href="blog-post.html"><img src="{{post.image.url}}" alt="" style="width: 555px; height: 333px;"></a>
+								<a class="post-img" href="blog-post.html"><img src="{{post.image.url}}" alt="" style="width: 540spx; height: 333px;"></a>
 							{% endif %}
 
 							<div class="post-body">
+								<!-- Button of editing -->
 								<!-- This option for user to update blogs he created not another blogs -->
 								{% if post.author == user %}
 								<div class="form-group btn-editing" style="float: left ;margin-bottom: 17rem;">
 									<a class="btn btn-success" href="{% url 'blog:update_post' post.slug %}">تعديل</a>
-									<button class="btn btn-danger" type="submit">حذف</button>
+									<a class="btn btn-danger" href="{% url 'blog:delete_post' post.slug %}">حذف</a>
+
 								</div>
 								{% endif %}
-
 								<img class="img-circle border mb-3" width="70" height="70"
 								src="{{post.author.profile.image.url}}" style="margin-bottom: -11rem; margin-right: 45rem;">
 								<div class="post-meta">
@@ -48,6 +46,7 @@
 						</div>
 					</div>
 					{% endfor %}
+
 
 					{% if posts.has_other_pages %}
 					<!-- Pagination -->
@@ -79,13 +78,10 @@
 					</div>
 					<!-- /Pagination -->
 					{% endif %}
+				</div>
+				</div>
 					<!-- /post -->
-				</div>
-				<!-- /row -->
-				<!-- row -->
-				<div class="row">
 
-				</div>
 		<!-- /section -->
 		<!-- section -->
 		<div class="section">

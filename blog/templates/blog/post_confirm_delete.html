@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+    {% block content %}
+        <div class="container" >
+			<div class="row " style="padding-right: 30%; margin-top: 44px; ">
+                <div class="col-md-8 ">
+				<form method="POST" >
+                    {% csrf_token %}
+                    <!-- We using object not post because we using class based view -->
+					<h3> هل انت متأكد من حذف  {{object.title}} ؟</h3> 
+                    <div class="section-row">
+                        <div class="row " >
+                            <div class="form-group btn-editing" style="float: left ;margin-bottom: 17rem;">
+                                <a class="btn btn-success" href="{% url 'blog:detail' post.slug %}">تراجع</a>
+                                <input class="btn btn-danger" type="submit" value="حذف">
+                            </div>
+                        </div>
+					</div>
+                </form>
+            </div>
+            </div>
+		</div>
+    {% endblock content %}

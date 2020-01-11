@@ -4,8 +4,8 @@ from .models import Post ,Comment
 from .forms import CommentForm , CreatePostForm
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from django.views.generic import CreateView ,UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView ,UpdateView ,DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
 
 
 def post_list(request):
@@ -51,6 +51,7 @@ def blog_post(request , slug):
     return render(request ,'blog/blog-post.html',context )
 
 #We use LoginRequiredMixin for no one can create blog if not login
+# and should create LOGIN_URL='login' in sittings.py 
 class PostCreateView(LoginRequiredMixin ,CreateView):
     model = Post
     # fields = ['title' , 'short_description' , 'description' , 'image']
@@ -60,12 +61,31 @@ class PostCreateView(LoginRequiredMixin ,CreateView):
     def form_valid(self , form ):
         form.instance.author = self.request.user
         return super().form_valid(form)
-
-class PostUpdateView(LoginRequiredMixin ,UpdateView):
+#ًUserPassesTestMixin = The process of verifying that this user is the owner of the post that he or she wants to Update
+#and the test_func will process of this verifying
+class PostUpdateView(UserPassesTestMixin , LoginRequiredMixin ,UpdateView):
     model = Post
     form_class = CreatePostForm
-    template_name = 'blog/add_new_post.html'
+    template_name = 'blog/post_update.html'
 
     def form_valid(self , form ):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+#ًUserPassesTestMixin = The process of verifying that this user is the owner of the post that he or she wants to delete
+#and the test_func will process of this verifying
+class PostDeleteView(UserPassesTestMixin , LoginRequiredMixin ,DeleteView):
+    model = Post
+    success_url = '/'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False

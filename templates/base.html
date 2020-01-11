@@ -61,16 +61,17 @@
 							<li><a href="/blog">الصفحه الرئيسيه</a></li>
 
 							{% if user.is_authenticated %}
+							
 							<li><a href="{% url 'user:profile' %}">من انا</a></li>
 							{% endif %}
-							<li class="cat-2"><a href="category.html">اشهر المدونات</a></li>
+							<li class="cat-2"><a href="category.html">اهم المقالات</a></li>
 
 						</ul>
 						<!-- We use "is_authenticated" for check user is login or not -->
 						{% if user.is_authenticated %}
 						<!-- if use login status -->
 						<ul class="nav-menu nav navbar-nav" style="margin-right: 34rem;">
-							<li class="cat-1"><a href="{% url 'blog:add_post'%}">إنشاء مقاله</a></li>
+							<li class="cat-1"><a href="/blog/add_post/">إنشاء مقاله</a></li>
 							<li ><a href="{% url 'user:logout' %}">تسجيل الخروج</a></li>
 						</ul>
 						<div class="nav-btns">
@@ -104,13 +105,18 @@
 				<div id="nav-aside">
 					<!-- nav -->
 					<div class="section-row">
-						<ul class="nav-aside-menu">
-							<li><a href="#">من نحن</a></li>
+						<ul class="nav-aside-menu text-center">
+							<li><a href="/blog">اجدد المقالات</a></li>
+							<li><a href="/blog">اهم المقالات</a></li>
+
 							{% if user.is_authenticated %}
 								<li><a href="{% url 'user:profile' %}">الصفحه الشخصيه</a></li>
+
 							{% else %}
 								<li><a href="{% url 'user:signup' %}">انضم لنا</a></li>
 							{% endif %}
+								<li><a href="#">من نحن</a></li>
+
 						</ul>
 					</div>
 					<!-- /nav -->

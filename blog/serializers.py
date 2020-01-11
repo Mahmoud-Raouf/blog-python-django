@@ -43,7 +43,21 @@ class PostUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
 
     def put(self, request , *args, **kwargs):
-        return super().update(request , *args, **kwargs)
+        respone = super().update(request , *args, **kwargs)
+        if respone.satatus_code == 200:
+            from django.core.cache import cache
+            post = respone.data
+            cache.set('post_data_{}'.format(post['id']),{
+                'title' :post['title'],
+                'short_description' : post['short_description'],
+                'description' : post['description'],
+            })
+        return respone
 
     def delete(self, request , *args, **kwargs):
-        return super().delete(request , *args, **kwargs)
+        post_id = request.data.get('id')
+        respons = super().delete(request , *args, **kwargs)
+        if respons.status_code == 204:
+            from django.core.cache import cache
+            cache.delete('post_data_{}'.format(post_id))
+        return respons

@@ -6,10 +6,19 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.views.generic import CreateView ,UpdateView ,DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin ,UserPassesTestMixin
-
+from django.db.models import Q
 
 def post_list(request):
     posts = Post.objects.all()
+
+    query = request.GET.get('search')
+    if query:
+        posts = Post.objects.filter(
+        Q(title__icontains=query)|
+        Q(short_description__icontains=query)|
+        Q(description__icontains=query)
+        )
+    print(query)
 
     paginator = Paginator(posts , 4)
     page_number = request.GET.get('page')

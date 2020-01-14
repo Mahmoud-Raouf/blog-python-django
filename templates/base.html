@@ -1,256 +1,261 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	
+	{% if title %}
+		<title>DJANGO | {{title}}</title>
+		{% else %}
+		<title>DJANGO</title>
+
+	{% endif %}
 		
-		{% if title %}
-			<title>DJANGO | {{title}}</title>
-			{% else %}
-			<title>DJANGO</title>
 
-		{% endif %}
-			
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600" rel="stylesheet"> 
 
-		<!-- Google font -->
-		<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:700%7CNunito:300,600" rel="stylesheet"> 
+	<!-- Bootstrap -->
+	<link type="text/css" rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css'%}"/>
 
-		<!-- Bootstrap -->
-		<link type="text/css" rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css'%}"/>
+	<!-- Font Awesome Icon -->
+	<link rel="stylesheet" href="{% static 'blog/css/font-awesome.min.css'%}">
 
-		<!-- Font Awesome Icon -->
-		<link rel="stylesheet" href="{% static 'blog/css/font-awesome.min.css'%}">
+	<!-- Custom stlylesheet -->
+	<link type="text/css" rel="stylesheet" href="{% static 'blog/css/style.css'%}"/>
+	<link type="text/css" rel="stylesheet" href="{% static 'blog/css/bootstrap-rtl.css'%}"/>
 
-		<!-- Custom stlylesheet -->
-		<link type="text/css" rel="stylesheet" href="{% static 'blog/css/style.css'%}"/>
-		<link type="text/css" rel="stylesheet" href="{% static 'blog/css/bootstrap-rtl.css'%}"/>
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
 
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-		  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-		<![endif]-->
+</head>
+<body>
+	<div dir="rtl">
+	<!-- Header -->
+	<header id="header" dir="rtl"> 
+		<!-- Nav -->
+		<div id="nav">
+			<!-- Main Nav -->
+			<div id="nav-fixed">
+				<div class="container" dir="rtl">
+					<!-- logo -->
+					<div class="nav-logo">
+						<a href="index.html" class="logo"><img src="./img/logo.png" alt=""></a>
+					</div>
+					<!-- /logo -->
 
-    </head>
-	<body>
-        <div dir="rtl">
-		<!-- Header -->
-		<header id="header" dir="rtl"> 
-			<!-- Nav -->
-			<div id="nav">
-				<!-- Main Nav -->
-				<div id="nav-fixed">
-					<div class="container" dir="rtl">
-						<!-- logo -->
-						<div class="nav-logo">
-							<a href="index.html" class="logo"><img src="./img/logo.png" alt=""></a>
-						</div>
-						<!-- /logo -->
+					<!-- search & aside toggle -->
+					<div class="nav-btns">
+						<button class="aside-btn"><i class="fa fa-bars"></i></button>
+					</div>
+					<!-- /search & aside toggle -->
+					<!-- nav -->
+					<ul class="nav-menu nav navbar-nav">
+						<li><a href="/blog">الصفحه الرئيسيه</a></li>
 
-						<!-- search & aside toggle -->
-						<div class="nav-btns">
-							<button class="aside-btn"><i class="fa fa-bars"></i></button>
-						</div>
-						<!-- /search & aside toggle -->
-						<!-- nav -->
-						<ul class="nav-menu nav navbar-nav">
-							<li><a href="/blog">الصفحه الرئيسيه</a></li>
-
-							{% if user.is_authenticated %}
-							
-							<li><a href="{% url 'user:profile' %}">من انا</a></li>
-							{% endif %}
-							<li class="cat-2"><a href="category.html">اهم المقالات</a></li>
-
-						</ul>
-						<!-- We use "is_authenticated" for check user is login or not -->
 						{% if user.is_authenticated %}
-						<!-- if use login status -->
-						<ul class="nav-menu nav navbar-nav" style="margin-right: 34rem;">
-							<li class="cat-1"><a href="/blog/add_post/">إنشاء مقاله</a></li>
-							<li ><a href="{% url 'user:logout' %}">تسجيل الخروج</a></li>
-						</ul>
-						<div class="nav-btns">
-							<button class="search-btn"><i class="fa fa-search"></i></button>
-							<div class="search-form">
-								<input class="search-input " type="text" name="search" placeholder="ابحث هنا ....">
-								<button class="search-close"><i class="fa fa-times"></i></button>
-							</div>
-						</div>
-						{% else %}
-						<!-- if use logout status -->
-						<!-- /nav -->
-						<ul class="nav-menu nav navbar-nav" style="margin-right: 45rem;">
-							<li><a href="{% url 'user:login'%}">تسجيل الدخول</a></li>
-							<li><a href="{% url 'user:signup' %}">تسجيل</a></li>
-						</ul>
-						<div class="nav-btns">
-							<button class="search-btn"><i class="fa fa-search"></i></button>
-							<div class="search-form">
-								<input class="search-input " type="text" name="search" placeholder="ابحث هنا ....">
-								<button class="search-close"><i class="fa fa-times"></i></button>
-							</div>
-						</div>
+						
+						<li><a href="{% url 'user:profile' %}">من انا</a></li>
 						{% endif %}
+						<li class="cat-2"><a href="category.html">اهم المقالات</a></li>
 
+					</ul>
+					<!-- We use "is_authenticated" for check user is login or not -->
+					{% if user.is_authenticated %}
+					<!-- if use login status -->
+					<ul class="nav-menu nav navbar-nav" style="margin-right: 34rem;">
+						<li class="cat-1"><a href="/blog/add_post/">إنشاء مقاله</a></li>
+						<li ><a href="{% url 'user:logout' %}">تسجيل الخروج</a></li>
+					</ul>
+					<div class="nav-btns">
+						<button class="search-btn"><i class="fa fa-search"></i></button>
+								<form class="form-inline" method="GET" >
+								<div class="search-form">
+									<input class="search-input " type="text" name="search" placeholder="ابحث هنا ....">
+									<button  class="search-close"><i class="fa fa-times"></i></button>
+								</div>
+							</form>
+					</div>
+					{% else %}
+					<!-- if use logout status -->
+					<!-- /nav -->
+					<ul class="nav-menu nav navbar-nav" style="margin-right: 45rem;">
+						<li><a href="{% url 'user:login'%}">تسجيل الدخول</a></li>
+						<li><a href="{% url 'user:signup' %}">تسجيل</a></li>
+					</ul>
+					<div class="nav-btns">
+						<button class="search-btn"><i class="fa fa-search"></i></button>
+							<form class="form-inline" method="GET" >
+							<div class="search-form">
+								<input class="search-input " type="text" name="search" placeholder="ابحث هنا ....">
+								<button class="search-close"><i class="fa fa-times"></i></button>
+							</div>
+						</form>
 					</div>
 				</div>
-				<!-- /Main Nav -->
+					{% endif %}
 
-				<!-- Aside Nav -->
-				<div id="nav-aside">
-					<!-- nav -->
-					<div class="section-row">
-						<ul class="nav-aside-menu text-center">
-							<li><a href="/blog">اجدد المقالات</a></li>
-							<li><a href="/blog">اهم المقالات</a></li>
+				</div>
+			</div>
+			<!-- /Main Nav -->
 
-							{% if user.is_authenticated %}
-								<li><a href="{% url 'user:profile' %}">الصفحه الشخصيه</a></li>
+			<!-- Aside Nav -->
+			<div id="nav-aside">
+				<!-- nav -->
+				<div class="section-row">
+					<ul class="nav-aside-menu text-center">
+						<li><a href="/blog">اجدد المقالات</a></li>
+						<li><a href="/blog">اهم المقالات</a></li>
 
-							{% else %}
-								<li><a href="{% url 'user:signup' %}">انضم لنا</a></li>
-							{% endif %}
-								<li><a href="#">من نحن</a></li>
+						{% if user.is_authenticated %}
+							<li><a href="{% url 'user:profile' %}">الصفحه الشخصيه</a></li>
 
+						{% else %}
+							<li><a href="{% url 'user:signup' %}">انضم لنا</a></li>
+						{% endif %}
+							<li><a href="#">من نحن</a></li>
+
+					</ul>
+				</div>
+				<!-- /nav -->
+
+				<!-- widget posts -->
+				<div class="section-row" dir="ltr">
+					<h3>المقالات الاخيره</h3>
+					<div class="post post-widget">
+						<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-2.jpg'%}" alt=""></a>
+						<div class="post-body">
+							<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
+						</div>
+					</div>
+
+					<div class="post post-widget">
+						<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-3.jpg'%}" alt=""></a>
+						<div class="post-body">
+							<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
+						</div>
+					</div>
+
+					<div class="post post-widget">
+						<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-4.jpg'%}" alt=""></a>
+						<div class="post-body">
+							<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
+						</div>
+					</div>
+				</div>
+				<!-- /widget posts -->
+
+				<!-- social links -->
+				<div class="section-row">
+					<h3>تابعنا</h3>
+					<ul class="nav-aside-social">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+					</ul>
+				</div>
+				<!-- /social links -->
+
+				<!-- aside nav close -->
+				<button class="nav-aside-close"><i class="fa fa-times"></i></button>
+				<!-- /aside nav close -->
+			</div>
+			<!-- Aside Nav -->
+		</div>
+		<!-- /Nav -->
+	</header>
+	<!-- /Header -->
+{% block content %}
+
+{% endblock content %}
+<div>
+	<!-- Footer -->
+	<footer id="footer">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<div class="col-md-5">
+					<div class="footer-widget">
+						<div class="footer-logo">
+							<a href="index.html" class="logo"><img src="./img/logo.png" alt=""></a>
+						</div>
+						<ul class="footer-nav">
+							<li><a href="#">الخصوصيه</a></li>
+							<li><a href="#">الاعلانات</a></li>
 						</ul>
-					</div>
-					<!-- /nav -->
-
-					<!-- widget posts -->
-					<div class="section-row" dir="ltr">
-						<h3>المقالات الاخيره</h3>
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-2.jpg'%}" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Pagedraw UI Builder Turns Your Website Design Mockup Into Code Automatically</a></h3>
-							</div>
-						</div>
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-3.jpg'%}" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Why Node.js Is The Coolest Kid On The Backend Development Block!</a></h3>
-							</div>
-						</div>
-
-						<div class="post post-widget">
-							<a class="post-img" href="blog-post.html"><img src="{% static 'blog/img/widget-4.jpg'%}" alt=""></a>
-							<div class="post-body">
-								<h3 class="post-title"><a href="blog-post.html">Tell-A-Tool: Guide To Web Design And Development Tools</a></h3>
-							</div>
+						<div class="footer-copyright">
+							<span>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
 						</div>
 					</div>
-					<!-- /widget posts -->
+				</div>
 
-					<!-- social links -->
-					<div class="section-row">
-						<h3>تابعنا</h3>
-						<ul class="nav-aside-social">
+				<div class="col-md-4">
+					<div class="row">
+						<div class="col-md-6">
+							<div class="footer-widget">
+								<h3 class="footer-title">من نحن</h3>
+								<ul class="footer-links">
+									<li><a href="about.html">تعرف علينا</a></li>
+									<li><a href="#">انضم لنا</a></li>
+									<li><a href="contact.html">المحتوى</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="footer-widget">
+								<h3 class="footer-title">المحتوى</h3>
+								<ul class="footer-links">
+									<li><a href="category.html">Web Design</a></li>
+									<li><a href="category.html">JavaScript</a></li>
+									<li><a href="category.html">Css</a></li>
+									<li><a href="category.html">Jquery</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-3">
+					<div class="footer-widget">
+						<h3 class="footer-title">انضم الى صفحتنا</h3>
+						<div class="footer-newsletter">
+							<form>
+								<input class="input" type="email" name="newsletter" placeholder="ادخل الايميل">
+								<button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button>
+							</form>
+						</div>
+						<ul class="footer-social">
 							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
 							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
 							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
 						</ul>
 					</div>
-					<!-- /social links -->
-
-					<!-- aside nav close -->
-					<button class="nav-aside-close"><i class="fa fa-times"></i></button>
-					<!-- /aside nav close -->
 				</div>
-				<!-- Aside Nav -->
+
 			</div>
-			<!-- /Nav -->
-		</header>
-		<!-- /Header -->
-{% block content %}
-  
-{% endblock content %}
-<div>
-		<!-- Footer -->
-		<footer id="footer">
-			<!-- container -->
-			<div class="container">
-				<!-- row -->
-				<div class="row">
-					<div class="col-md-5">
-						<div class="footer-widget">
-							<div class="footer-logo">
-								<a href="index.html" class="logo"><img src="./img/logo.png" alt=""></a>
-							</div>
-							<ul class="footer-nav">
-								<li><a href="#">الخصوصيه</a></li>
-								<li><a href="#">الاعلانات</a></li>
-							</ul>
-							<div class="footer-copyright">
-								<span>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></span>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-4">
-						<div class="row">
-							<div class="col-md-6">
-								<div class="footer-widget">
-									<h3 class="footer-title">من نحن</h3>
-									<ul class="footer-links">
-										<li><a href="about.html">تعرف علينا</a></li>
-										<li><a href="#">انضم لنا</a></li>
-										<li><a href="contact.html">المحتوى</a></li>
-									</ul>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<div class="footer-widget">
-									<h3 class="footer-title">المحتوى</h3>
-									<ul class="footer-links">
-										<li><a href="category.html">Web Design</a></li>
-										<li><a href="category.html">JavaScript</a></li>
-										<li><a href="category.html">Css</a></li>
-										<li><a href="category.html">Jquery</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-3">
-						<div class="footer-widget">
-							<h3 class="footer-title">انضم الى صفحتنا</h3>
-							<div class="footer-newsletter">
-								<form>
-									<input class="input" type="email" name="newsletter" placeholder="ادخل الايميل">
-									<button class="newsletter-btn"><i class="fa fa-paper-plane"></i></button>
-								</form>
-							</div>
-							<ul class="footer-social">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-							</ul>
-						</div>
-					</div>
-
-				</div>
-				<!-- /row -->
-			</div>
-			<!-- /container -->
-		</footer>
-		<!-- /Footer -->
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</footer>
+	<!-- /Footer -->
+</div>
+	<!-- jQuery Plugins -->
+	<script src="{% static 'blog/js/jquery.min.js'%}"></script>
+	<script src="{% static 'blog/js/bootstrap.min.js'%}"></script>
+	<script src="{% static 'blog/js/main.js'%}"></script>
 	</div>
-		<!-- jQuery Plugins -->
-		<script src="{% static 'blog/js/jquery.min.js'%}"></script>
-		<script src="{% static 'blog/js/bootstrap.min.js'%}"></script>
-		<script src="{% static 'blog/js/main.js'%}"></script>
-        </div>
 
-	</body>
+</body>
 </html>
